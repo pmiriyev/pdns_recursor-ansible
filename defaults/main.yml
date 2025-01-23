@@ -1,5 +1,4 @@
 ---
-
 # By default the PowerDNS Recursor is installed from the os default repositories.
 # This setting has no effect on FreeBSD
 pdns_rec_install_repo: ""
@@ -88,14 +87,14 @@ pdns_rec_config_from_files_dir_mode: "0750"
 pdns_rec_config_from_files: []
 # Dict containing all configuration options, except for the
 # "config-dir", "setuid" and "setgid" directives in YAML format.
-pdns_rec_config: {}
-# pdns_rec_config:
-#  allow-from: '127.0.0.1/8,192.168.2.0/24'
-#  local-address: 0.0.0.0
-#  server-id: 'nothing to see here'
-#  forward-zones:
-#    - "example.com=192.0.2.2:5300;192.0.2.128"
-#    - "foo.example.com=2001:db8::abcd:1;[2001:db8::ef99]:5300"
+# pdns_rec_config: {}
+pdns_rec_config:
+  allow-from: '127.0.0.1/8,{{ internal_subnet }}'
+  local-address: '0.0.0.0:5301'
+  server-id: '{{ ansible_hostname }}'
+  forward-zones:
+    - "{{ domain }}=127.0.0.1:5300"
+    - ".=1.1.1.1;1.0.0.1;2606:4700:4700::1111;2606:4700:4700::1001"
 
 # Dict with overrides for the service (systemd only)
 pdns_rec_service_overrides: "{{ default_pdns_rec_service_overrides }}"
