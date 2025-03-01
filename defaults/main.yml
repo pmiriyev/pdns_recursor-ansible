@@ -90,7 +90,7 @@ pdns_rec_config_from_files: []
 # pdns_rec_config: {}
 pdns_rec_config:
   allow-from: '127.0.0.0/8,{{ internal_subnet }}'
-  local-address: '0.0.0.0:5301'
+  local-address: '0.0.0.0:53'
   server-id: '{{ ansible_hostname }}'
   forward-zones: "{{ domain }}=127.0.0.1:5300"
   forward-zones-recurse: ".=1.1.1.1;1.0.0.1;2606:4700:4700::1111;2606:4700:4700::1001"
